@@ -23,12 +23,14 @@ import java.util.Objects;
 
 import ru.yandex.practicum.contacts.R;
 import ru.yandex.practicum.contacts.databinding.ItemContactBinding;
+import ru.yandex.practicum.contacts.presentation.base.BaseListDiffCallback;
+import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> implements ListDiffInterface<ContactUi> {
 
     private final AsyncListDiffer<ContactUi> differ = new AsyncListDiffer<>(
             new AdapterListUpdateCallback(this),
-            new AsyncDifferConfig.Builder<>(new ListDiffCallback()).build()
+            new AsyncDifferConfig.Builder<>(new BaseListDiffCallback()).build()
     );
 
     @NonNull
@@ -55,6 +57,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     public void setItems(List<ContactUi> items, @NonNull Runnable callback) {
         differ.submitList(items, callback);
+    }
+
+    @Override
+    public boolean theSameAs(ContactUi contactUi) {
+        return false;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
