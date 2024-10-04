@@ -24,11 +24,11 @@ import ru.yandex.practicum.contacts.presentation.filter.model.FilterContactTypeU
 import ru.yandex.practicum.contacts.utils.model.ContactTypeUtils;
 import ru.yandex.practicum.contacts.utils.model.FilterContactTypeUtils;
 
-public class FilterContactTypeAdapter extends RecyclerView.Adapter<FilterContactTypeAdapter.ViewHolder> implements ListDiffInterface<FilterContactTypeUi> {
+public class FilterContactTypeAdapter extends RecyclerView.Adapter<FilterContactTypeAdapter.ViewHolder> {
 
-    private final AsyncListDiffer<FilterContactTypeUi> differ = new AsyncListDiffer<>(
+    private final AsyncListDiffer<FilterContactTypeUi> differ = new AsyncListDiffer<FilterContactTypeUi>(
             new AdapterListUpdateCallback(this),
-            new AsyncDifferConfig.Builder<>(new BaseListDiffCallback()).build()
+            new AsyncDifferConfig.Builder<>(new BaseListDiffCallback<FilterContactTypeUi>()).build()
     );
 
     private final Consumer<FilterContactTypeUi> clickListener;
@@ -59,7 +59,6 @@ public class FilterContactTypeAdapter extends RecyclerView.Adapter<FilterContact
         differ.submitList(items);
     }
 
-    @Override
     public boolean theSameAs(FilterContactTypeUi filterContactTypeUi) {
         return false;
     }

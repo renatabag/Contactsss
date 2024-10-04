@@ -7,7 +7,7 @@ import java.util.List;
 import ru.yandex.practicum.contacts.model.ContactType;
 import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 
-public class ContactUi implements ListDiffInterface<ContactType> {
+public class ContactUi implements ListDiffInterface<ContactUi> {
 
     private final String name;
     private final String phone;
